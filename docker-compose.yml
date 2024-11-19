@@ -1,9 +1,14 @@
+networks:
+  unklab:
+    external: true
+
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:latest
+    pull_policy: always
     container_name: uptime-kuma
+    restart: unless-stopped
+    networks:
+      - unklab
     volumes:
       - ./uptime-kuma-data:/app/data
-    ports:
-      - 64111:3001
-    restart: unless-stopped
